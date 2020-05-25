@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="container">
     <h1>Demo Vue JS</h1>
 
     <RaceForm :races="races" :currentRace="currentRace" :handleChange="handleRaceChange"/>

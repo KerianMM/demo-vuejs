@@ -1,5 +1,5 @@
 {
-  "name": "vue",
+  "name": "vue-demo-bootstrap",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@vue/cli-plugin-babel": "4.1.1",
+    "bootstrap-vue": "2.15.0",
     "vue": "^2.6.11"
   },
   "devDependencies": {
@@ -43,10 +44,6 @@
     "last 2 versions",
     "not ie <= 8"
   ],
-  "keywords": [
-    "vue",
-    "vuejs",
-    "starter"
-  ],
-  "description": "Vue.js example starter project"
+  "keywords": [],
+  "description": ""
 }
