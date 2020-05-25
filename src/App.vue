@@ -1,26 +1,23 @@
 <template>
   <div id="app">
-    <div id="race-form">
-      <select v-on:change="handleRaceChange">
-        <option disabled :selected="currentRace === null">Sélectionner une race</option>
-        <option v-for="race in races" :value="race.id" :key="race.id">{{ race.name }}</option>
-      </select>
-    </div>
-    <span ref="race-span"/>
-    <div id="images" v-if="images.length">
-      <div v-for="image in images" :key="image.id" style="width:40%; padding: 1rem">
-        <img :src="image.url" :alt="`{race.name} n°{image.id}`" style="width:100%;">
-      </div>
-    </div>
+    <h1>Demo Vue JS</h1>
+
+    <RaceForm :races="races" :currentRace="currentRace" :handleChange="handleRaceChange"/>
+
+    <Images :images="images" v-if="currentRace !== null"/>
   </div>
 </template>
 
 <script>
-import { getRaces } from "./services/races";
 import { getImages } from "./services/images";
+import { getRaces } from "./services/races";
+
+import Images from "./components/Images";
+import RaceForm from "./components/RaceForm";
 
 export default {
   name: "App",
+  components: { Images, RaceForm },
   data: () => {
     return {
       images: [],
@@ -34,23 +31,27 @@ export default {
         race => race.id === event.target.value
       );
 
-      this.$refs["race-span"].innerHTML = this.$data.currentRace.name;
+      await this.loadImages();
+    },
+    async loadRaces() {
+      const response = await getRaces();
+      const races = await response.json();
 
-      const response = await getImages(this.$data.currentRace);
+      this.$data.races = races.map(({ id, name }) => {
+        return { id, name };
+      });
+    },
+    async loadImages() {
+      const response = await getImages(this.currentRace);
       const images = await response.json();
 
-      this.$data.images = images.map(image => {
-        return { id: image.id, url: image.url };
+      this.$data.images = images.map(({ id, url }) => {
+        return { id, url };
       });
     }
   },
   async created() {
-    const response = await getRaces();
-    const races = await response.json();
-
-    this.$data.races = races.map(race => {
-      return { id: race.id, name: race.name };
-    });
+    this.loadRaces();
   }
 };
 </script>
