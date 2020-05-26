@@ -1,0 +1,33 @@
+<template>
+  <Badge :text="category.name" :attributes="attributes" :events="events"/>
+</template>
+
+<script>
+import Badge from "./Badge";
+
+export default {
+  name: "BadgeCategory",
+  components: { Badge },
+  props: {
+    category: {
+      type: Object,
+      required: true
+    },
+    handleSelectCategory: {
+      type: Function,
+      required: true
+    }
+  },
+  data() {
+    return {
+      attributes: {
+        "data-category-id": this.category.id,
+        style: "cursor:pointer;"
+      },
+      events: {
+        click: this.handleSelectCategory
+      }
+    };
+  }
+};
+</script>
