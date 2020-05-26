@@ -13,6 +13,16 @@
             :handleSelectRace="handleSelectRace"
           />
         </div>
+        <hr>
+        <div class="px-3 py-2">
+          <h2>Categories</h2>
+          <BadgeCategory
+            v-for="category in categories"
+            :key="category.id"
+            :category="category"
+            :handleSelectCategory="handleSelectCategory"
+          />
+        </div>
       </b-sidebar>
     </b-navbar>
   </div>
@@ -21,17 +31,26 @@
 <script>
 import { BButton, BSidebar } from "bootstrap-vue";
 
+import BadgeCategory from "./BadgeCategory";
 import BadgeRace from "./BadgeRace";
 
 export default {
   name: "Sidebar",
-  components: { BadgeRace, BButton, BSidebar },
+  components: { BadgeCategory, BadgeRace, BButton, BSidebar },
   props: {
     races: {
       type: Array,
       required: true
     },
     handleSelectRace: {
+      type: Function,
+      required: true
+    },
+    categories: {
+      type: Array,
+      required: true
+    },
+    handleSelectCategory: {
       type: Function,
       required: true
     }
