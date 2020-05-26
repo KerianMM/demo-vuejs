@@ -1,10 +1,10 @@
 <template>
-  <div id="app" class="container">
-    <h1>Demo Vue JS</h1>
+  <div id="app">
+    <Sidebar :races="races" :handleSelectRace="handleSelectRace"/>
 
-    <RaceForm :races="races" :currentRace="currentRace" :handleChange="handleRaceChange"/>
-
-    <Images :images="images" v-if="currentRace !== null"/>
+    <div id="body" class="container">
+      <Images :images="images" v-if="currentRace !== null"/>
+    </div>
   </div>
 </template>
 
@@ -13,11 +13,11 @@ import { getImages } from "./services/images";
 import { getRaces } from "./services/races";
 
 import Images from "./components/Images";
-import RaceForm from "./components/RaceForm";
+import Sidebar from "./components/Sidebar";
 
 export default {
   name: "App",
-  components: { Images, RaceForm },
+  components: { Images, Sidebar },
   data: () => {
     return {
       images: [],
@@ -26,9 +26,9 @@ export default {
     };
   },
   methods: {
-    async handleRaceChange(event) {
+    async handleSelectRace(event) {
       this.$data.currentRace = this.races.find(
-        race => race.id === event.target.value
+        race => race.id === event.target.dataset.raceId
       );
 
       await this.loadImages();
@@ -55,14 +55,3 @@ export default {
   }
 };
 </script>
-
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
