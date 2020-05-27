@@ -12,10 +12,6 @@ export default {
     category: {
       type: Object,
       required: true
-    },
-    handleSelectCategory: {
-      type: Function,
-      required: true
     }
   },
   data() {
@@ -28,6 +24,13 @@ export default {
         click: this.handleSelectCategory
       }
     };
+  },
+  methods: {
+    async handleSelectCategory(event) {
+      const categoryId = parseInt(event.target.dataset.categoryId, 10);
+
+      this.$store.dispatch("setCurrentCategory", categoryId);
+    }
   }
 };
 </script>
