@@ -6,12 +6,12 @@
       <b-sidebar id="sidebar-component" title="Menu">
         <div class="px-3 py-2">
           <h2>Races</h2>
-          <BadgeRace
-            v-for="race in races"
-            :key="race.id"
-            :race="race"
-            :handleSelectRace="handleSelectRace"
-          />
+          <BadgeRace v-for="race in races" :key="race.id" :race="race"/>
+        </div>
+        <hr>
+        <div class="px-3 py-2">
+          <h2>Categories</h2>
+          <BadgeCategory v-for="category in categories" :key="category.id" :category="category"/>
         </div>
       </b-sidebar>
     </b-navbar>
@@ -20,21 +20,19 @@
 
 <script>
 import { BButton, BSidebar } from "bootstrap-vue";
+import { mapState } from "vuex";
 
+import BadgeCategory from "./BadgeCategory";
 import BadgeRace from "./BadgeRace";
 
 export default {
   name: "Sidebar",
-  components: { BadgeRace, BButton, BSidebar },
-  props: {
-    races: {
-      type: Array,
-      required: true
-    },
-    handleSelectRace: {
-      type: Function,
-      required: true
-    }
+  components: { BadgeCategory, BadgeRace, BButton, BSidebar },
+  computed: {
+    ...mapState({
+      races: state => state.races,
+      categories: state => state.categories
+    })
   }
 };
 </script>

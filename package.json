@@ -1,5 +1,5 @@
 {
-  "name": "vue-demo-bootstrap",
+  "name": "vue-catapi-06-vuex",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,7 +10,8 @@
   "dependencies": {
     "@vue/cli-plugin-babel": "4.1.1",
     "bootstrap-vue": "2.15.0",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vuex": "3.4.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-eslint": "4.1.1",

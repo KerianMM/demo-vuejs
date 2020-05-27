@@ -4,6 +4,7 @@
       <span>Aucune image chargée</span>
     </div>
     <div v-else>
+      <h1>{{ title() }}</h1>
       <b-carousel
         id="images-carousel"
         v-model="slide"
@@ -26,16 +27,18 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import { BCarousel, BCarouselSlide } from "bootstrap-vue";
 
 export default {
   name: "Images",
   components: { BCarousel, BCarouselSlide },
-  props: {
-    images: {
-      type: Array,
-      required: true
-    }
+  computed: {
+    ...mapState({
+      images: state => state.images,
+      currentRace: state => state.currentRace,
+      currentCategory: state => state.currentCategory
+    })
   },
   data() {
     return {
@@ -44,6 +47,13 @@ export default {
     };
   },
   methods: {
+    title() {
+      const prefix = this.currentCategory !== null ? "Catégorie" : "Race";
+      const item =
+        this.currentCategory !== null ? this.currentCategory : this.currentRace;
+
+      return `${prefix} : ${item.name}`;
+    },
     onSlideStart(slide) {
       this.sliding = true;
     },

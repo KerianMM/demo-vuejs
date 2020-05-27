@@ -12,10 +12,6 @@ export default {
     race: {
       type: Object,
       required: true
-    },
-    handleSelectRace: {
-      type: Function,
-      required: true
     }
   },
   data() {
@@ -28,6 +24,11 @@ export default {
         click: this.handleSelectRace
       }
     };
+  },
+  methods: {
+    async handleSelectRace(event) {
+      this.$store.dispatch("setCurrentRace", event.target.dataset.raceId);
+    }
   }
 };
 </script>
