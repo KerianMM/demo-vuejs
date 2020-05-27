@@ -13,6 +13,16 @@
           <h2>Categories</h2>
           <BadgeCategory v-for="category in categories" :key="category.id" :category="category"/>
         </div>
+        <hr>
+        <div class="px-3 py-2">
+          <h2>Categories</h2>
+          <BadgeCategory
+            v-for="category in categories"
+            :key="category.id"
+            :category="category"
+            :handleSelectCategory="handleSelectCategory"
+          />
+        </div>
       </b-sidebar>
     </b-navbar>
   </div>
